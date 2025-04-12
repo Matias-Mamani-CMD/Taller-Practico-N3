@@ -79,10 +79,91 @@ def ejercicio4():
     for oracion in oraciones:
         print(f"Vocales en la oración: {contar_vocales(oracion)}\n Consonantes en la oración: {contar_consonantes(oracion)}")
 
+def mostrar_matriz(Matriz):
+    print("Vector resultante")
+    for fila in Matriz:
+        print(fila)
+
+def suma_matriz(MatrizA, MatrizB):
+    filas = len(MatrizA)
+    columnas = len(MatrizA[0])
+    MatrizC = []
+    
+    for i in range(filas):
+        fila_suma = []
+        for j in range(columnas):
+            numero_suma = MatrizA[i][j] + MatrizB[i][j]
+            fila_suma.append(numero_suma)
+        MatrizC.append(fila_suma)
+    return MatrizC
+    
+def producto_matriz(MatrizA, MatrizB):
+    filas = len(MatrizA)
+    columnas = len(MatrizA[0])
+    MatrizC = []
+    
+    for i in range(filas):
+        fila_suma = []
+        for j in range(columnas):
+            numero_suma = MatrizA[i][j] * MatrizB[i][j]
+            fila_suma.append(numero_suma)
+        MatrizC.append(fila_suma)
+    return MatrizC
+    
+def cargar_matriz_A(A, B):
+    matriz_A = []
+    for i in range(A):
+        fila = []
+        for j in range(B):
+            numero = random.randint(1,100)
+            fila.append(numero)
+        matriz_A.append(fila)
+    
+    print("Matriz A:")
+    for fila in matriz_A:
+        print(fila)    
+    print("///////////")
+    return matriz_A
+
+def cargar_matriz_B(C,D):
+    matriz_B = []
+    for i in range(C):
+        fila = []
+        for j in range(D):
+            numero = random.randint(1,100)
+            fila.append(numero)
+        matriz_B.append(fila)
+    
+    print("Matriz B:")
+    for fila in matriz_B:
+        print(fila)
+    print("///////////")
+    return matriz_B
+
+def ejercicio6():
+    M = random.randint(1,9)
+    N = random.randint(1,9)
+    MatrizA = cargar_matriz_A(M,N)
+    MatrizB = cargar_matriz_B(M,N)
+    print("¿Qué operación desea realizar?")
+    print("1.Suma Matrices")
+    print("2.Producto Matrices")
+    opcion = int(input("Ingrese una opción: "))
+    if opcion in [1,2]:
+        if opcion == 1:
+         MatrizC = suma_matriz(MatrizA, MatrizB)
+         mostrar_matriz(MatrizC)
+        else:
+         MatrizD = producto_matriz(MatrizA, MatrizB)
+         mostrar_matriz(MatrizD)
+    else:
+     print("Opción invalida")
+
 def menu():
     ejercicio1()
     ejercicio2()
     ejercicio3()
     ejercicio4()
+    ejercicio6()
 if __name__ == '__main__':
     menu()
