@@ -86,4 +86,3 @@ def menu():
     ejercicio4()
 if __name__ == '__main__':
     menu()
-    print("Buenas noches")
