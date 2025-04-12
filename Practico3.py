@@ -57,6 +57,7 @@ def contar_vocales(oracion):
         if letra in ('a','e','i','o','u','á', 'é', 'í', 'ó', 'ú'):
             cont_voc += 1
     return cont_voc
+
 def contar_consonantes(oracion):
     cont_cons = 0
     for letra in oracion.lower():
@@ -78,6 +79,49 @@ def ejercicio4():
     ingreso_oraciones(oraciones)
     for oracion in oraciones:
         print(f"Vocales en la oración: {contar_vocales(oracion)}\n Consonantes en la oración: {contar_consonantes(oracion)}")
+
+def calcular_potencia(K, X):
+    for i in range(X):
+        potencia = K * K
+    print(f"La potencia de {K} es {potencia}")
+
+def cantidad_digitos(K):
+    n_digitos = len(str(K))
+    print(f"Cantidad de dígitos de {K}: {n_digitos}")
+
+def es_capicua(K):
+    n_original = K
+    invertido = 0
+
+    while K > 0:
+        dig = K % 10
+        invertido = invertido * 10 + dig
+        K //= 10
+
+    if n_original == invertido:
+        print(f"{n_original} es un número capicúa.")
+    else:
+        print(f"{n_original} no es un número capicúa.")
+
+def ejercicio5():
+    print("1 - Calcular la potencia")
+    print("2 - Obtener cantidad de dígitos")
+    print("3 - Determinar si es capicúa")
+
+    op = int(input("Ingrese una opción del menú: "))
+    
+    if op == 1:
+        K = int(input("Ingrese un número: "))
+        X = int(input("Ingrese otro número (potencia): "))
+        calcular_potencia(K, X)
+
+    elif op == 2:
+        K = int(input("Ingrese un número: "))
+        cantidad_digitos(K)
+
+    elif op == 3:
+        K = int(input("Ingrese un número: "))
+        es_capicua(K)
 
 def mostrar_matriz(Matriz):
     print("Vector resultante")
@@ -164,6 +208,7 @@ def menu():
     ejercicio2()
     ejercicio3()
     ejercicio4()
+    ejercicio5()
     ejercicio6()
 if __name__ == '__main__':
     menu()
