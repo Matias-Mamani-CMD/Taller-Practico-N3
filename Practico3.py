@@ -263,6 +263,44 @@ def ejercicio8():
     electrodomestico_menor_precio(matriz)
     mostrar_stock_positivo(matriz)
 
+def rotar_vector(vector, posiciones):
+    for _ in range(posiciones):
+        primero = vector.pop(0)
+        vector.append(primero)
+    return vector
+
+def ejercicio10():
+    rodillo1 = ["X", "O", "7", "X", "O", "7", "X", "O", "7"]
+    rodillo2 = ["O", "7", "X", "O","7", "X", "O", "7", "X"]
+    rodillo3 = ["7", "X", "O", "7", "X", "O", "7", "X", "O"]
+
+    while True:
+        print("Jugada")
+        giro1 = random.randint(0, 9)
+        giro2 = random.randint(0, 9)
+        giro3 = random.randint(0, 9)
+
+        rodillo1_rotado = rotar_vector(rodillo1.copy(), giro1 % 9)
+        rodillo2_rotado = rotar_vector(rodillo2.copy(), giro2 % 9)
+        rodillo3_rotado = rotar_vector(rodillo3.copy(), giro3 % 9)
+
+        print(f"Rodillos:")
+        print(f"[{rodillo1_rotado[0]}] [{rodillo2_rotado[0]}] [{rodillo3_rotado[0]}]")
+
+        combinacion = rodillo1_rotado[0] + rodillo2_rotado[0] + rodillo3_rotado[0]
+        if combinacion == "XXX":
+            print("Ganó 10 fichas")
+        elif combinacion == "OOO":
+            print("Gano 100 fichas")
+        elif combinacion == "777":
+            print("Ganó 1000 fichas")
+        else:
+            print("Vuelve a intentarlo!")
+
+        seguir_jugando = input("¿Desea jugar otra vez? (s/n): ").lower()
+        if seguir_jugando != 's':
+            break
+
 def menu():
     ejercicio1()
     ejercicio2()
