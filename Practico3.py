@@ -233,7 +233,6 @@ def suma_diagonal(matriz):
     suma = 0
     for i in range(len(matriz)):
         suma += matriz[i][i]
-    print(f"Suma de la diagonal principal: {suma}")
     return suma
 
 def generar_matriz(M):
