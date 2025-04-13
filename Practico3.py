@@ -26,8 +26,7 @@ def suma_vectores(Vector_A, Vector_B):
         vector_resultante.append(Vector_A[i]+Vector_B[i])
     print(f"Vector resultante: {vector_resultante}")
     
-def mostrar_vector(Vector):
-    print(f"Vector: {Vector}")
+def mostrar_vector(Vector):    print(f"Vector: {Vector}")
 
 def cargar_vector(C, Vector):
     for _ in range(C):
@@ -81,9 +80,10 @@ def ejercicio4():
         print(f"Vocales en la oración: {contar_vocales(oracion)}\n Consonantes en la oración: {contar_consonantes(oracion)}")
 
 def calcular_potencia(K, X):
-    for i in range(X):
-        potencia = K * K
-    print(f"La potencia de {K} es {potencia}")
+    potencia = 1
+    for _ in range(X):
+        potencia *= K
+    print(f"La potencia {X} de {K} es {potencia}")
 
 def cantidad_digitos(K):
     n_digitos = len(str(K))
@@ -92,12 +92,10 @@ def cantidad_digitos(K):
 def es_capicua(K):
     n_original = K
     invertido = 0
-
     while K > 0:
         dig = K % 10
         invertido = invertido * 10 + dig
         K //= 10
-
     if n_original == invertido:
         print(f"{n_original} es un número capicúa.")
     else:
@@ -107,18 +105,14 @@ def ejercicio5():
     print("1 - Calcular la potencia")
     print("2 - Obtener cantidad de dígitos")
     print("3 - Determinar si es capicúa")
-
     op = int(input("Ingrese una opción del menú: "))
-    
     if op == 1:
         K = int(input("Ingrese un número: "))
         X = int(input("Ingrese otro número (potencia): "))
         calcular_potencia(K, X)
-
     elif op == 2:
         K = int(input("Ingrese un número: "))
         cantidad_digitos(K)
-
     elif op == 3:
         K = int(input("Ingrese un número: "))
         es_capicua(K)
@@ -203,20 +197,64 @@ def ejercicio6():
     else:
      print("Opción invalida")
 
-def suma_diagonal_principal(matriz):
+def ordenar_vector(vector):
+    vector.sort()
+    print(f"Vector ordenado de menor a mayor: {vector}")
+
+def eliminar_duplicados(vector):
+    resultado = []
+    for num in vector:
+        if num not in resultado:
+            resultado.append(num)
+    print(f"Vector sin elementos repetidos: {resultado}")
+    return resultado
+
+def numeros_con_factorial_mayor_o_igual(matriz, suma):
+    resultado = []
+    for fila in matriz:
+        for num in fila:
+            if calcular_factorial(num) >= suma:
+                resultado.append(num)
+    return resultado
+
+def calcular_factorial(matriz, limite):
+    vector = []
+    for fila in matriz:
+        for num in fila:
+            resultado = 1
+            for i in range(1, num + 1):
+                resultado *= i
+            if resultado >= limite:
+                vector.append(num)
+    print(f"Vector con factorial mayor o igual a la suma de la diagonal: {vector}")
+    return vector
+
+def suma_diagonal(matriz):
     suma = 0
     for i in range(len(matriz)):
         suma += matriz[i][i]
+    print(f"Suma de la diagonal principal: {suma}")
     return suma
 
-def ejercicio7():
-    M = random.randint(1,9)
-    matriz = cargar_matriz_A(M)
-    suma_diagonal = suma_diagonal_principal(matriz)
-    print(f"Matriz {M}x{M}")
+def generar_matriz(M):
+    matriz = []
+    for _ in range(M):
+        fila = []
+        for _ in range(M):
+            fila.append(random.randint(1, 9))
+        matriz.append(fila)
+    print("Matriz generada:")
     for fila in matriz:
         print(fila)
-    print(f"La suma de la diagonal principal es: {suma_diagonal}")
+    return matriz
+
+def ejercicio7():
+    M = int(input("Ingrese el tamaño de la matriz cuadrada (M): "))
+    matriz = generar_matriz(M)
+    suma_diag = suma_diagonal(matriz)
+    vector = calcular_factorial(matriz, suma_diag)
+    vector = eliminar_duplicados(vector)
+    ordenar_vector(vector)
 
 def convertir_int_a_str(matriz):
     for fila in matriz: 
@@ -262,6 +300,68 @@ def ejercicio8():
     seleccion_usuarios_proveedores(matriz)
     electrodomestico_menor_precio(matriz)
     mostrar_stock_positivo(matriz)
+
+def mostrar_lista_espera(lista_espera):
+    if lista_espera:
+        print("Pacientes en espera:")
+        for paciente in lista_espera:
+            print(f"• {paciente}")
+    else:
+        print("No hay pacientes en espera.")
+
+def determinar_pacientes_antes_de(lista_espera):
+    nombre_paciente = input("Nombre y apellido del paciente:")
+    if nombre_paciente in lista_espera:
+        posicion = lista_espera.index(nombre_paciente)
+        print(f"Faltan {posicion} paciente(s) antes de atender a {nombre_paciente}")
+    else:
+        print(f"No se encontró al paciente en la lista.")
+
+def atender_urgencia(lista_espera):
+    nombre_paciente = input("Nombre y apellido del paciente con urgencia: ")
+    lista_espera.inser(0, nombre_paciente)
+    print(f"El paciente {nombre_paciente} ha ingresado con urgencia al principio de la lista de espera.")
+
+def atender_paciente(lista_espera):
+    if lista_espera:
+        paciente_por_atender = lista_espera.pop(0)
+        print(f"Se atendió al paciente: {paciente_por_atender}")
+    else:
+        print("No hay pacientes en la lista")
+
+def ingresar_paciente(lista_espera):
+    nombre_paciente = input("Nombre y apellido del paciente: ")
+    lista_espera.append(nombre_paciente)
+    print(f"Se ingresó el paciente {nombre_paciente} a la lista de espera.")
+
+
+def ejercicio9():
+    lista_espera = []
+    print("Menú consultorio médico")
+    print("1. Ingresar nuevo paciente")
+    print("2. Atender siguiente paciente")
+    print("3. Atender paciente con urgencia")
+    print("4. Ver cuántos pacientes faltan antes de uno específico")
+    print("5. Mostrar lista de espera")
+    print("0. Salir")
+
+    while True:
+        op = input("Ingrese una opción del menú: ")
+        if op == "1":
+            ingresar_paciente(lista_espera)
+        elif op == "2":
+            atender_paciente(lista_espera)
+        elif op == "3":
+            atender_urgencia(lista_espera)
+        elif op == "4":
+            determinar_pacientes_antes_de(lista_espera)
+        elif op == "5":
+            mostrar_lista_espera(lista_espera)
+        elif op == "0":
+            print("Saliendo...")
+            break
+        else:
+            print("Opción no válida. Ingrese una opción del menú.")
 
 def rotar_vector(vector, posiciones):
     for _ in range(posiciones):
@@ -309,5 +409,8 @@ def menu():
     ejercicio5()
     ejercicio6()
     ejercicio7()
+    ejercicio8()
+    ejercicio9()
+    ejercicio10()
 if __name__ == '__main__':
     menu()
