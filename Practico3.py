@@ -318,7 +318,7 @@ def determinar_pacientes_antes_de(lista_espera):
 
 def atender_urgencia(lista_espera):
     nombre_paciente = input("Nombre y apellido del paciente con urgencia: ")
-    lista_espera.inser(0, nombre_paciente)
+    lista_espera.insert(0, nombre_paciente)
     print(f"El paciente {nombre_paciente} ha ingresado con urgencia al principio de la lista de espera.")
 
 def atender_paciente(lista_espera):
@@ -332,7 +332,6 @@ def ingresar_paciente(lista_espera):
     nombre_paciente = input("Nombre y apellido del paciente: ")
     lista_espera.append(nombre_paciente)
     print(f"Se ingresó el paciente {nombre_paciente} a la lista de espera.")
-
 
 def ejercicio9():
     lista_espera = []
