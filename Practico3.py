@@ -203,6 +203,68 @@ def ejercicio6():
     else:
      print("Opción invalida")
 
+def suma_diagonal_principal(matriz):
+    suma = 0
+    for i in range(len(matriz)):
+        suma += matriz[i][i]
+    return suma
+
+def calcular_factorial(n):
+
+def ejercicio7():
+    M = random.randint(1,9)
+    matriz = cargar_matriz_A(M)
+    suma_diagonal = suma_diagonal_principal(matriz)
+    print(f"Matriz {M}x{M}")
+    for fila in matriz:
+        print(fila)
+    print(f"La suma de la diagonal principal es: {suma_diagonal}")
+
+def convertir_int_a_str(matriz):
+    for fila in matriz: 
+        fila[2] = str(fila[2])
+        fila[3] = str(fila[3])
+    return
+
+def seleccion_usuarios_proveedores(matriz):
+    seleccion_proveedor = input("Seleccione un proveedor para visualizar sus productos:\n ").strip().lower()
+    for fila in matriz:
+        if seleccion_proveedor in fila[1].strip().lower():
+            print(f"Productos del proveedor {fila[1]}: {fila[0]}")
+               
+def electrodomestico_menor_precio(matriz):
+    menor = int(matriz[0][2])
+    producto_menor = matriz[0][0]
+    for fila in matriz:
+       if int(fila[2]) <= menor:
+            menor = int(fila[2])
+            producto_menor = fila[0]
+    print(f"El electrodoméstico más barato es {producto_menor}:\n Precio: {menor}")           
+        
+def mostrar_stock_positivo(matriz):
+    electrodomestico_stock_positivo = []
+    for fila in matriz:
+       if int(fila[3]) > 0:
+           electrodomestico_stock_positivo.append((fila[0],fila[3]))
+    for fila in electrodomestico_stock_positivo:
+        print(f"Productos con stock positivo:{fila}")               
+        
+def ejercicio8():
+    matriz = [
+       ["Licuadora", "Philips", 150,0],
+       ["Plancha", "Atma", 160, 2],
+       ["Equipo Música", "Sony", 850, 3],
+       ["Heladera", "Dream", 1000, 2],
+       ["Lavarropas", "Dream", 1500, 2],
+       ["Televisor","Philips", 700, 0],
+       ["DVD", "Sony", 250, 1],
+       ["Microondas", "Dream",300,0] 
+    ]
+    convertir_int_a_str(matriz)
+    seleccion_usuarios_proveedores(matriz)
+    electrodomestico_menor_precio(matriz)
+    mostrar_stock_positivo(matriz)
+
 def menu():
     ejercicio1()
     ejercicio2()
@@ -210,6 +272,5 @@ def menu():
     ejercicio4()
     ejercicio5()
     ejercicio6()
-
 if __name__ == '__main__':
     menu()
