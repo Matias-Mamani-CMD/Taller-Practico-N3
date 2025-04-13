@@ -209,8 +209,6 @@ def suma_diagonal_principal(matriz):
         suma += matriz[i][i]
     return suma
 
-def calcular_factorial(n):
-
 def ejercicio7():
     M = random.randint(1,9)
     matriz = cargar_matriz_A(M)
@@ -272,5 +270,6 @@ def menu():
     ejercicio4()
     ejercicio5()
     ejercicio6()
+    ejercicio7()
 if __name__ == '__main__':
     menu()
